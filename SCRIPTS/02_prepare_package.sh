@@ -63,11 +63,11 @@ CONFIG_LRNG_JENT=y
 # Grub 2
 wget -qO - https://github.com/QiuSimons/openwrt-NoTengoBattery/commit/afed16a.patch | patch -p1
 # Haproxy
-rm -rf ./feeds/packages/net/haproxy
-svn export https://github.com/openwrt/packages/trunk/net/haproxy feeds/packages/net/haproxy
-pushd feeds/packages
-wget -qO - https://github.com/QiuSimons/packages/commit/7ffbfbe.patch | patch -p1
-popd
+#rm -rf ./feeds/packages/net/haproxy
+#svn export https://github.com/openwrt/packages/trunk/net/haproxy feeds/packages/net/haproxy
+#pushd feeds/packages
+#wget -qO - https://github.com/QiuSimons/packages/commit/7ffbfbe.patch | patch -p1
+#popd
 # OPENSSL
 wget -P package/libs/openssl/patches/ https://github.com/openssl/openssl/pull/11895.patch
 wget -P package/libs/openssl/patches/ https://github.com/openssl/openssl/pull/14578.patch
@@ -102,9 +102,9 @@ wget -P package/kernel/linux/modules/ https://github.com/immortalwrt/immortalwrt
 # ImmortalWrt Uboot TMP Fix
 wget -qO- https://github.com/immortalwrt/immortalwrt/commit/433c93e.patch | patch -REp1
 # R4S超频到 2.2/1.8 GHz
-#rm -rf ./target/linux/rockchip/patches-5.4/992-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch
-#cp -f ../PATCH/target_r4s/991-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch ./target/linux/rockchip/patches-5.4/991-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch
-#cp -f ../PATCH/target_r4s/213-RK3399-set-critical-CPU-temperature-for-thermal-throttling.patch ./target/linux/rockchip/patches-5.4/213-RK3399-set-critical-CPU-temperature-for-thermal-throttling.patch
+rm -rf ./target/linux/rockchip/patches-5.4/992-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch
+cp -f ../PATCH/target_r4s/991-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch ./target/linux/rockchip/patches-5.4/991-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch
+cp -f ../PATCH/target_r4s/213-RK3399-set-critical-CPU-temperature-for-thermal-throttling.patch ./target/linux/rockchip/patches-5.4/213-RK3399-set-critical-CPU-temperature-for-thermal-throttling.patch
 # Disable Mitigations
 sed -i 's,rootwait,rootwait mitigations=off,g' target/linux/rockchip/image/mmc.bootscript
 sed -i 's,rootwait,rootwait mitigations=off,g' target/linux/rockchip/image/nanopi-r2s.bootscript
@@ -443,6 +443,8 @@ rm -rf ./feeds/packages/net/zerotier/files/etc/init.d/zerotier
 sed -i '/Default,one/a\\t$(STAGING_DIR_HOST)/bin/upx --lzma --best $(PKG_BUILD_DIR)/zerotier-one' feeds/packages/net/zerotier/Makefile
 # 翻译及部分功能优化
 svn export https://github.com/QiuSimons/OpenWrt-Add/trunk/addition-trans-zh package/lean/lean-translate
+#SCUTclient
+git clone https://github.com/scutclient/scutclient package/new/scutclient
 
 ### 最后的收尾工作 ###
 # Lets Fuck
